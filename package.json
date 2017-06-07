@@ -1,52 +1,49 @@
 {
-  "name": "p-forever",
-  "version": "1.0.0",
-  "description": "Run promise-returning & async functions repeatedly until you end it",
-  "license": "MIT",
-  "repository": "sindresorhus/p-forever",
-  "author": {
-    "name": "Sindre Sorhus",
-    "email": "sindresorhus@gmail.com",
-    "url": "sindresorhus.com"
-  },
-  "engines": {
-    "node": ">=4"
-  },
-  "scripts": {
-    "test": "xo && ava"
-  },
-  "files": [
-    "index.js"
-  ],
-  "keywords": [
-    "promise",
-    "forever",
-    "infinitely",
-    "infinite",
-    "while",
-    "whilst",
-    "repeat",
-    "repeatedly",
-    "recursive",
-    "recursion",
-    "times",
-    "number",
-    "count",
-    "loop",
-    "iterate",
-    "serial",
-    "serially",
-    "async",
-    "await",
-    "promises",
-    "bluebird"
-  ],
-  "devDependencies": {
-    "ava": "*",
-    "delay": "^1.3.1",
-    "xo": "*"
-  },
-  "xo": {
-    "esnext": true
-  }
+	"name": "p-forever",
+	"version": "1.0.0",
+	"description": "Run promise-returning & async functions repeatedly until you end it",
+	"license": "MIT",
+	"repository": "sindresorhus/p-forever",
+	"author": {
+		"name": "Sindre Sorhus",
+		"email": "sindresorhus@gmail.com",
+		"url": "sindresorhus.com"
+	},
+	"engines": {
+		"node": ">=4"
+	},
+	"scripts": {
+		"test": "xo && ava"
+	},
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"promise",
+		"forever",
+		"infinitely",
+		"infinite",
+		"while",
+		"whilst",
+		"repeat",
+		"repeatedly",
+		"recursive",
+		"recursion",
+		"times",
+		"number",
+		"count",
+		"loop",
+		"iterate",
+		"serial",
+		"serially",
+		"async",
+		"await",
+		"promises",
+		"bluebird"
+	],
+	"devDependencies": {
+		"ava": "*",
+		"delay": "^2.0.0",
+		"xo": "*"
+	}
 }

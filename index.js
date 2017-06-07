@@ -1,16 +1,17 @@
 'use strict';
 const symbolEnd = Symbol('pForever.end');
 
-module.exports = function (fn, initVal) {
-	return new Promise((resolve, reject) => {
-		const loop = prevVal => Promise.resolve(prevVal).then(fn).then(lastVal => {
-			if (lastVal === symbolEnd) {
-				return resolve();
-			}
-			loop(lastVal);
-		}).catch(reject);
-		loop(initVal);
-	});
-};
+module.exports = (fn, initVal) => new Promise((resolve, reject) => {
+	const loop = prevVal => Promise.resolve(prevVal).then(fn).then(fnRetVal => {
+		if (fnRetVal === symbolEnd) {
+			resolve();
+			return;
+		}
+
+		loop(fnRetVal);
+	}).catch(reject);
+
+	loop(initVal);
+});
 
 module.exports.end = symbolEnd;
