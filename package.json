@@ -1,6 +1,6 @@
 {
 	"name": "p-forever",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Run promise-returning & async functions repeatedly until you end it",
 	"license": "MIT",
 	"repository": "sindresorhus/p-forever",
