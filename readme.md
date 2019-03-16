@@ -8,7 +8,7 @@ Think of it like an async version of `while (true) {}`.
 ## Install
 
 ```
-$ npm install --save p-forever
+$ npm install p-forever
 ```
 
 
@@ -21,7 +21,14 @@ const pForever = require('p-forever');
 
 pForever(i => {
 	i++;
-	return i <= 100 ? createFixture(i) : pForever.end;
+
+	if (i > 100) {
+		return pForever.end;
+	}
+
+	await createFixture(i);
+
+	return i;
 }, 0);
 ```
 
@@ -34,7 +41,12 @@ let i = 0;
 
 pForever(() => {
 	i++;
-	return i <= 100 ? createFixture(i) : pForever.end;
+
+	if (i > 100) {
+		return pForever.end;
+	}
+
+	await createFixture(i);
 });
 ```
 
