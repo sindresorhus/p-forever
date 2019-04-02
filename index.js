@@ -12,6 +12,7 @@ const pForever = async (fn, previousValue) => {
 };
 
 module.exports = pForever;
+// TODO: Remove this for the next major release
 module.exports.default = pForever;
 
 module.exports.end = symbolEnd;
