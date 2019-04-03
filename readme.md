@@ -19,7 +19,7 @@ Here we create some numbered fixtures. The `createFixture()` function returns a 
 ```js
 const pForever = require('p-forever');
 
-pForever(i => {
+pForever(async i => {
 	i++;
 
 	if (i > 100) {
@@ -39,7 +39,7 @@ const pForever = require('p-forever');
 
 let i = 0;
 
-pForever(() => {
+pForever(async () => {
 	i++;
 
 	if (i > 100) {

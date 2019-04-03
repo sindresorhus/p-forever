@@ -1,5 +1,5 @@
-import {expectType} from 'tsd-check';
-import pForever from '.';
+import {expectType} from 'tsd';
+import pForever = require('.');
 
 expectType<Promise<void>>(
 	pForever(i => {
