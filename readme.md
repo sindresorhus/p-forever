@@ -1,4 +1,4 @@
-# p-forever [![Build Status](https://travis-ci.org/sindresorhus/p-forever.svg?branch=master)](https://travis-ci.org/sindresorhus/p-forever)
+# p-forever
 
 > Run promise-returning & async functions until you end it
 
