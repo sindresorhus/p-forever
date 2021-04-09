@@ -1,20 +1,20 @@
 import test from 'ava';
 import delay from 'delay';
-import pForever from '.';
+import pForever from './index.js';
 
 test('main', async t => {
-	let i = 0;
-	await pForever(async () => ++i === 10 ? pForever.end : delay(50));
-	t.is(i, 10);
+	let index = 0;
+	await pForever(async () => ++index === 10 ? pForever.end : delay(50));
+	t.is(index, 10);
 });
 
 test('forward the value', async t => {
 	let lastValue;
 
-	await pForever(async i => {
-		i++;
-		lastValue = i;
-		return i === 10 ? pForever.end : i;
+	await pForever(async index => {
+		index++;
+		lastValue = index;
+		return index === 10 ? pForever.end : index;
 	}, 0);
 
 	t.is(lastValue, 10);

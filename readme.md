@@ -4,56 +4,54 @@
 
 Think of it like an async version of `while (true) {}`.
 
-
 ## Install
 
 ```
 $ npm install p-forever
 ```
 
-
 ## Usage
 
 Here we create some numbered fixtures. The `createFixture()` function returns a Promise.
 
 ```js
-const pForever = require('p-forever');
+import pForever from 'p-forever';
 
-pForever(async i => {
-	i++;
+pForever(async index => {
+	index++;
 
-	if (i > 100) {
+	if (index > 100) {
 		return pForever.end;
 	}
 
-	await createFixture(i);
+	await createFixture(index);
 
-	return i;
+	return index;
 }, 0);
 ```
 
 or
 
 ```js
-const pForever = require('p-forever');
+import pForever from 'p-forever';
 
-let i = 0;
+let index = 0;
 
 pForever(async () => {
-	i++;
+	index++;
 
-	if (i > 100) {
+	if (index > 100) {
 		return pForever.end;
 	}
 
-	await createFixture(i);
+	await createFixture(index);
 });
 ```
 
 
 ## API
 
-### pForever(fn, [initialValue])
+### pForever(fn, initialValue?)
 
 Returns a `Promise` that is fulfilled when `fn` returns `pForever.end`, or rejects if any of the promises returned from `fn` rejects.
 
@@ -71,14 +69,8 @@ Initial value to pass to `fn`.
 
 Symbol used to end the loop.
 
-
 ## Related
 
 - [p-times](https://github.com/sindresorhus/p-times) - Run promise-returning & async functions a specific number of times concurrently
 - [p-whilst](https://github.com/sindresorhus/p-whilst) - Calls a function repeatedly while a condition returns true and then resolves the promise
 - [More…](https://github.com/sindresorhus/promise-fun)
-
-
-## License
-
-MIT © [Sindre Sorhus](https://sindresorhus.com)

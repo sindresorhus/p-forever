@@ -1,18 +1,15 @@
-'use strict';
-const symbolEnd = Symbol('pForever.end');
+const endSymbol = Symbol('pForever.end');
 
-const pForever = async (fn, previousValue) => {
-	const newValue = await fn(await previousValue);
+const pForever = async (function_, previousValue) => {
+	const newValue = await function_(await previousValue);
 
-	if (newValue === symbolEnd) {
+	if (newValue === endSymbol) {
 		return;
 	}
 
-	return pForever(fn, newValue);
+	return pForever(function_, newValue);
 };
 
-module.exports = pForever;
-// TODO: Remove this for the next major release
-module.exports.default = pForever;
+pForever.end = endSymbol;
 
-module.exports.end = symbolEnd;
+export default pForever;

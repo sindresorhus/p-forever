@@ -1,44 +1,44 @@
 import {expectType} from 'tsd';
-import pForever = require('.');
+import pForever from './index.js';
 
 expectType<Promise<void>>(
-	pForever(i => {
-		expectType<number>(i);
-		i++;
-		return i <= 100 ? i : pForever.end;
+	pForever(index => {
+		expectType<number>(index);
+		index++;
+		return index <= 100 ? index : pForever.end;
 	}, 0)
 );
 
 expectType<Promise<void>>(
-	pForever(i => {
-		expectType<number>(i);
-		i++;
-		return i <= 100 ? i : pForever.end;
+	pForever(index => {
+		expectType<number>(index);
+		index++;
+		return index <= 100 ? index : pForever.end;
 	}, Promise.resolve(0))
 );
 
 expectType<Promise<void>>(
-	pForever(i => {
-		expectType<number>(i);
-		i++;
-		return i <= 100 ? Promise.resolve(i) : pForever.end;
+	pForever(index => {
+		expectType<number>(index);
+		index++;
+		return index <= 100 ? Promise.resolve(index) : pForever.end;
 	}, 0)
 );
 
-let i = 0;
+let index = 0;
 
 expectType<Promise<void>>(
 	pForever<number>(previousValue => {
 		expectType<number | undefined>(previousValue);
-		i++;
-		return i <= 100 ? i : pForever.end;
+		index++;
+		return index <= 100 ? index : pForever.end;
 	})
 );
 
 expectType<Promise<void>>(
 	pForever<number>(previousValue => {
 		expectType<number | undefined>(previousValue);
-		i++;
-		return i <= 100 ? Promise.resolve(i) : pForever.end;
+		index++;
+		return index <= 100 ? Promise.resolve(index) : pForever.end;
 	})
 );

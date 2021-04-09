@@ -1,60 +1,57 @@
 declare const pForever: {
 	/**
+	Symbol used to end the loop.
+	*/
+	readonly end: unique symbol;
+
+	/**
 	Run promise-returning & async functions until you end it.
 
-	@param fn - Receives the previously returned value. If a `Promise` is returned, it's awaited before calling `fn` again.
+	@param function_ - Receives the previously returned value. If a `Promise` is returned, it's awaited before calling `fn` again.
 	@param initialValue - Initial value to pass to `fn`.
 	@returns Fulfills when `fn` returns `pForever.end`, or rejects if any of the promises returned from `fn` rejects.
 
 	@example
 	```
-	import pForever = require('p-forever');
+	import pForever from 'p-forever';
 
-	pForever(async i => {
-		i++;
+	pForever(async index => {
+		index++;
 
-		if (i > 100) {
+		if (index > 100) {
 			return pForever.end;
 		}
 
-		await createFixture(i);
+		await createFixture(index);
 
-		return i;
+		return index;
 	}, 0);
 
 	// or
-	let i = 0;
+	let index = 0;
 
 	pForever(async () => {
-		i++;
+		index++;
 
-		if (i > 100) {
+		if (index > 100) {
 			return pForever.end;
 		}
 
-		await createFixture(i);
+		await createFixture(index);
 	});
 	```
 	*/
 	<ValueType>(
-		fn: (
+		function_: (
 			previousValue?: ValueType
 		) => ValueType | PromiseLike<ValueType> | typeof pForever.end
 	): Promise<void>;
 	<ValueType>(
-		fn: (
+		function_: (
 			previousValue: ValueType
 		) => ValueType | PromiseLike<ValueType> | typeof pForever.end,
 		initialValue: ValueType | PromiseLike<ValueType>
 	): Promise<void>;
-
-	/**
-	Symbol used to end the loop.
-	*/
-	readonly end: unique symbol;
-
-	// TODO: Remove this for the next major release
-	default: typeof pForever;
 };
 
-export = pForever;
+export default pForever;
