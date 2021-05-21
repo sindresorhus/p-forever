@@ -25,6 +25,14 @@ expectType<Promise<void>>(
 	}, 0)
 );
 
+expectType<Promise<void>>(
+	pForever(index => {
+		expectType<number>(index);
+		index++;
+		return index <= 100 ? index : Promise.resolve(pForever.end);
+	}, 0)
+);
+
 let index = 0;
 
 expectType<Promise<void>>(
@@ -40,5 +48,13 @@ expectType<Promise<void>>(
 		expectType<number | undefined>(previousValue);
 		index++;
 		return index <= 100 ? Promise.resolve(index) : pForever.end;
+	})
+);
+
+expectType<Promise<void>>(
+	pForever<number>(previousValue => {
+		expectType<number | undefined>(previousValue);
+		index++;
+		return index <= 100 ? index : Promise.resolve(pForever.end);
 	})
 );
