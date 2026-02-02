@@ -27,7 +27,7 @@ pForever(async index => {
 	await createFixture(index);
 
 	return index;
-}, 0);
+}, {initialValue: 0});
 ```
 
 or
@@ -48,22 +48,47 @@ pForever(async () => {
 });
 ```
 
-
 ## API
 
-### pForever(fn, initialValue?)
+### pForever(function_, options?)
 
-Returns a `Promise` that is fulfilled when `fn` returns `pForever.end`, or rejects if any of the promises returned from `fn` rejects.
+Returns a `Promise` that is fulfilled when `function_` returns `pForever.end`, rejects if any of the promises returned from `function_` rejects, or rejects with an `AbortError` if the signal is aborted.
 
-#### fn(previousValue)
+#### function_(previousValue)
 
 Type: `Function`
 
-Receives the previously returned value. If a `Promise` is returned, it's awaited before calling `fn` again.
+Receives the previously returned value. If a `Promise` is returned, it's awaited before calling `function_` again.
 
-#### initialValue
+#### options
 
-Initial value to pass to `fn`.
+Type: `object`
+
+##### initialValue
+
+Initial value to pass to `function_`.
+
+##### signal
+
+Type: [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal)
+
+An `AbortSignal` to abort the loop from outside.
+
+When aborted, the promise returned by `pForever` rejects with an `AbortError`.
+
+```js
+import pForever from 'p-forever';
+
+const abortController = new AbortController();
+
+setTimeout(() => {
+	abortController.abort();
+}, 500);
+
+await pForever(async () => {
+	await someWork();
+}, {signal: abortController.signal});
+```
 
 ### pForever.end
 

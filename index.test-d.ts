@@ -5,25 +5,25 @@ expectType<Promise<void>>(pForever(index => {
 	expectType<number>(index);
 	index++;
 	return index <= 100 ? index : pForever.end;
-}, 0));
+}, {initialValue: 0}));
 
 expectType<Promise<void>>(pForever(index => {
 	expectType<number>(index);
 	index++;
 	return index <= 100 ? index : pForever.end;
-}, Promise.resolve(0)));
+}, {initialValue: Promise.resolve(0)}));
 
 expectType<Promise<void>>(pForever(async index => {
 	expectType<number>(index);
 	index++;
 	return index <= 100 ? Promise.resolve(index) : pForever.end;
-}, 0));
+}, {initialValue: 0}));
 
 expectType<Promise<void>>(pForever(async index => {
 	expectType<number>(index);
 	index++;
 	return index <= 100 ? index : Promise.resolve(pForever.end);
-}, 0));
+}, {initialValue: 0}));
 
 let index = 0;
 
@@ -44,3 +44,12 @@ expectType<Promise<void>>(pForever<number>(async previousValue => {
 	index++;
 	return index <= 100 ? index : Promise.resolve(pForever.end);
 }));
+
+expectType<Promise<void>>(pForever(async () => {
+	await Promise.resolve();
+}, {signal: new AbortController().signal}));
+
+expectType<Promise<void>>(pForever(async index => {
+	expectType<number>(index);
+	return index + 1;
+}, {initialValue: 0, signal: new AbortController().signal}));

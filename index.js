@@ -1,13 +1,23 @@
 const endSymbol = Symbol('pForever.end');
 
-const pForever = async (function_, previousValue) => {
-	const newValue = await function_(await previousValue);
+const pForever = async (function_, options = {}) => {
+	const {initialValue, signal} = options;
 
-	if (newValue === endSymbol) {
-		return;
+	signal?.throwIfAborted();
+
+	let previousValue = await initialValue;
+
+	while (true) {
+		signal?.throwIfAborted();
+
+		const newValue = await function_(previousValue); // eslint-disable-line no-await-in-loop
+
+		if (newValue === endSymbol) {
+			return;
+		}
+
+		previousValue = newValue;
 	}
-
-	return pForever(function_, newValue);
 };
 
 pForever.end = endSymbol;
