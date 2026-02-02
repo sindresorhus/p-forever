@@ -6,8 +6,8 @@ Think of it like an async version of `while (true) {}`.
 
 ## Install
 
-```
-$ npm install p-forever
+```sh
+npm install p-forever
 ```
 
 ## Usage

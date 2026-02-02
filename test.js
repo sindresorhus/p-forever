@@ -27,6 +27,6 @@ test('rejects when returned promise rejects', async t => {
 		pForever(async () => {
 			throw fixtureError;
 		}),
-		{is: fixtureError}
+		{is: fixtureError},
 	);
 });

@@ -44,12 +44,12 @@ declare const pForever: {
 	<ValueType>(
 		function_: (
 			previousValue?: ValueType
-		) => ValueType | PromiseLike<ValueType> | typeof pForever.end | PromiseLike<typeof pForever.end>
+		) => ValueType | typeof pForever.end | PromiseLike<ValueType | typeof pForever.end>
 	): Promise<void>;
 	<ValueType>(
 		function_: (
 			previousValue: ValueType
-		) => ValueType | PromiseLike<ValueType> | typeof pForever.end | PromiseLike<typeof pForever.end>,
+		) => ValueType | typeof pForever.end | PromiseLike<ValueType | typeof pForever.end>,
 		initialValue: ValueType | PromiseLike<ValueType>
 	): Promise<void>;
 };
