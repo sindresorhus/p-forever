@@ -94,6 +94,22 @@ await pForever(async () => {
 
 Symbol used to end the loop.
 
+## Tips
+
+### Delay between executions
+
+```js
+import {setTimeout as delay} from 'node:timers/promises';
+import pForever from 'p-forever';
+
+pForever(async () => {
+	await run();
+	await delay(15_000);
+});
+```
+
+You could also use the [`delay`](https://github.com/sindresorhus/delay) package, which has a nicer API and supports `AbortSignal` directly.
+
 ## Related
 
 - [p-times](https://github.com/sindresorhus/p-times) - Run promise-returning & async functions a specific number of times concurrently
